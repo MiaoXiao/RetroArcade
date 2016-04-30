@@ -392,48 +392,12 @@ bool Hangman::guessWord(string word) {
                 }
                 
                 break;
-            case 9:
-                cout << "\033c";
-                cout << " ________\n |/      |\n |      (_)\n |      \\|/\n";
-                cout << " |       |\n |      / \\" << "\n |\n_|___\n\n";
-                
-                for (unsigned i = 0; i < guessedLetters.size(); ++i) {
-                    cout << guessedLetters.at(i);
-                }
-                
-                cout << "\nUsed Letters: ";
-                for (unsigned i = 0; i < usedLetters.size(); ++i) {
-                    cout << usedLetters.at(i) << " ";
-                }
-                
-                cout << "\nGuess a letter or word: \n";
-                cin  >> guess;
-                
-                if (guess == word || numCorrect == word.size()) {
-                    cout << "\nYou won!\n";
-                    return true;
-                } else if (word.find(guess) != string::npos) {
-                    guessCopy = guess.at(0);
-                    usedLetters.push_back(guessCopy);
-                    for (unsigned i = 0; i < word.size(); ++i) {
-                        if (guessCopy == word.at(i)) {
-                            guessedLetters.at(i) = guess;
-                        }
-                    }
-                    ++numCorrect;
-                } else {
-                    if (guess.size() == 1) {
-                        usedLetters.push_back(guess.at(0));
-                    }
-                    cout << "Wrong guess!\n";
-                    ++numWrong;
-                }
-                
-                break;
         }
     }
     cout << "\033c";
     cout << " ________\n |/      |\n |      (_)\n |      \\|/\n";
     cout << " |       |\n |      / \\" << "\n |\n_|___\n\n";
+    
+    cout << "Wrong guess! You lost!\n" << "The word was: " << word << endl;
     return false;
 }
