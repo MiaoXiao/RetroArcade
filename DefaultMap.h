@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <cstdlib>
-// #include "ObjectBase.h"
-#include "Obj.h"
+#include "ObjectBase.h"
+// #include "Obj.h"
 
 #define DEFAULT_ROWS 32
 #define DEFAULT_COLS 100

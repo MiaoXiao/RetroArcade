@@ -6,19 +6,22 @@ using namespace std;
 void Highscore::prompt(int score) {
     string name;
     
-    cout << "Enter your name: ";
-    cin >> input;
+    cout << "Enter your initials (no spaces!): ";
+    cin >> name;
     cout << endl;
     
     addScore(name, score);
+    cout << "\033c";
 }
 
 void Highscore::display() {
     unsigned size = scores.size();
+    string done;
     
     for (unsigned i = 0; i < size; ++i) {
-        cout << names.at(i) << ": " << scores.at(i) << endl;
+        cout << names.at(i) << ": " << scores.at(i) << endl << endl;
     }
+    cout << "Enter any key to return: "; cin >> done; cout << "\033c";
 }
 
 void Highscore::addScore(string name, int score) {
