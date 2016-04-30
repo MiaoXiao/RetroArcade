@@ -52,15 +52,14 @@ bool Quest::FloorOne(Player& Main, Player& Enemy, int Range) {
         int a = static_cast<int>(rand() % Range); int b = static_cast<int>(rand() % Range); int c = a + b;
         if (Enemy.MaxAttack > Main.CurrentHealth) { cout << "WARNING: IF YOU GET THIS WRONG, YOU MIGHT DIE!" << endl; }
         cout << "What is " << a << " + " << b << " ? "; cin >> input; cout << "\033c";
-        if(input == 0) { Enemy.CurrentHealth = 0; }
-        else if(input == (Main.Confidence * Main.Combo) && Main.Combo >= 3) { cout << "You used all your confidence!!! You did an extra " << Main.Confidence * Main.Combo << " damage!\n\n"; Enemy.CurrentHealth -= (Main.Confidence * Main.Combo); Main.Combo = 0; }
+        if(input == (Main.Confidence * Main.Combo) && Main.Combo >= 3) { cout << "You used all your confidence!!! You did an extra " << Main.Confidence * Main.Combo << " damage!\n\n"; Enemy.CurrentHealth -= (Main.Confidence * Main.Combo); Main.Combo = 0; }
         else if(input == c) { Enemy.takeDamage(Main); Main.takeBack(Enemy); ++Main.Combo; } else { cout << a << " + " << b << " was " << c << ". Not " << input << "." << endl << endl; Main.takeDamage(Enemy); Main.Combo = 0; }
     }
     if (Main.CurrentHealth > 0) { cout << "\033c" << Enemy.Name << " was defeated!\n\n"; return true; } else { return false; }
 }
 
 void Quest::Shop(Player& Main) {
-    int input; Main.MaxAttack += 10; Main.MinAttack += 10; Main.CurrentHealth += 10; Main.MaxHealth += 10; Main.Confidence += 10;
+    int input; Main.MaxAttack += 10; Main.MinAttack += 10; Main.CurrentHealth += 10; Main.MaxHealth += 10; Main.Confidence += 5;
     cout << "\"Hello. I'm the shopkeeper. What would you like?\"\n\n";
     cout << "|---------------------------|" << endl
          << "|                           |" << endl
@@ -75,7 +74,7 @@ void Quest::Shop(Player& Main) {
          << "|                           |" << endl
          << "|---------------------------|" << endl << endl << "Your Stats:\n"; Main.display(); cout << "\n1) A Lucky Cookie (Increase maximum attack!)\n\n2) Muscle Milk (Increases mininum + maximum attack!)\n\n3) Sparkling Sparkling Water (Fully heals you!)\n\n" << "4) Truth Cake (Increases you maximum health!)\n\n5) A Leadership Badge (Increases your base confidence!)\n\nEnter 1/2/3/4/5: "; cin >> input;
     while (input < 1 || input > 5) { cout << "Invalid Input. Please type 1, 2, 3, 4, or 5: "; cin >> input; }
-    if (input == 1) { Main.MaxAttack += 50; } else if (input == 2) { Main.MaxAttack += 25; Main.MinAttack += 25; } else if (input == 3) { Main.fullHeal(); } else if (input == 4) { Main.MaxHealth += 75; Main.CurrentHealth += 75; } else if (input == 5) { Main.Confidence += 20; } cout << "\033c";
+    if (input == 1) { Main.MaxAttack += 50; } else if (input == 2) { Main.MaxAttack += 25; Main.MinAttack += 25; } else if (input == 3) { Main.fullHeal(); } else if (input == 4) { Main.MaxHealth += 75; Main.CurrentHealth += 75; } else if (input == 5) { Main.Confidence += 10; } cout << "\033c";
 }
 
 void Quest::launch() {
